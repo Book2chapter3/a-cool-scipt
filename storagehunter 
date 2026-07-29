@@ -178,6 +178,14 @@ Button.MouseButton1Click:Connect(function()
     end
 end)
 
+task.spawn(function()
+while task.wait(0.1) do
+if Enabled then
+game:GetService("ReplicatedStorage").Events.Auction.Bid:FireServer()
+end
+end
+end)
+
 -- Bubble (panel minimisé)
 local bubble = Instance.new("TextButton")
 bubble.Size = UDim2.fromOffset(44,44)
