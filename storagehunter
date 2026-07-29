@@ -1,0 +1,45 @@
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = game:GetService("CoreGui")
+
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0, 140, 0, 60)
+Frame.Position = UDim2.new(0.5, -70, 0.5, -30)
+Frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Frame.Parent = ScreenGui
+
+local Corner = Instance.new("UICorner")
+Corner.Parent = Frame
+
+-- Rend la fenêtre déplaçable
+local Drag = Instance.new("UIDragDetector")
+Drag.Parent = Frame
+
+local Button = Instance.new("TextButton")
+Button.Size = UDim2.new(1, -10, 1, -10)
+Button.Position = UDim2.new(0, 5, 0, 5)
+Button.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+Button.TextColor3 = Color3.new(1, 1, 1)
+Button.Text = "OFF"
+Button.Parent = Frame
+
+local Enabled = false
+
+Button.MouseButton1Click:Connect(function()
+    Enabled = not Enabled
+
+    if Enabled then
+        Button.Text = "ON"
+        Button.BackgroundColor3 = Color3.fromRGB(60, 200, 60)
+    else
+        Button.Text = "OFF"
+        Button.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.1) do
+        if Enabled then
+            game:GetService("ReplicatedStorage").Events.Auction.Bid:FireServer()
+        end
+    end
+end)
