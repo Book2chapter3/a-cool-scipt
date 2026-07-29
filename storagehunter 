@@ -164,6 +164,19 @@ local function pill(name, iconName, cb)
 	b.MouseButton1Click:Connect(cb)
 end
 
+local Enabled = false
+
+Button.MouseButton1Click:Connect(function()
+    Enabled = not Enabled
+
+    if Enabled then
+        Button.Text = "ON"
+        Button.BackgroundColor3 = Color3.fromRGB(60, 200, 60)
+    else
+        Button.Text = "OFF"
+        Button.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+    end
+end)
 
 -- Bubble (panel minimisé)
 local bubble = Instance.new("TextButton")
